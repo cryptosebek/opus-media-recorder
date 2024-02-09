@@ -37,7 +37,7 @@ $(OPUS_OBJ_LIB): $(OPUS_DIR) $(OPUS_DIR)/autogen.sh
 							--disable-intrinsics \
 							--disable-rtcd \
 							--disable-asm
-	emmake make -C $<
+	emmake make -j -C $<
 
 $(OPUS_OBJ): $(OPUS_OBJ_LIB) $(LIB_BUILD_DIR)
 	cp $< $@
@@ -46,7 +46,7 @@ $(OPUS_OBJ): $(OPUS_OBJ_LIB) $(LIB_BUILD_DIR)
 $(OGG_OBJ_LIB): $(OGG_DIR) $(OGG_DIR)/autogen.sh
 	cd $< && ./autogen.sh
 	cd $< && emconfigure ./configure
-	emmake make -C $<
+	emmake make -j -C $<
 
 $(OGG_OBJ): $(OGG_OBJ_LIB) $(LIB_BUILD_DIR)
 	cp $< $@
@@ -56,7 +56,7 @@ $(SPEEX_OBJ_LIB): $(SPEEX_DIR) $(SPEEX_DIR)/autogen.sh
 	cd $< && ./autogen.sh
 	cd $< && emconfigure ./configure \
 							--disable-examples
-	emmake make -C $<
+	emmake make -j -C $<
 
 $(SPEEX_OBJ): $(SPEEX_OBJ_LIB) $(LIB_BUILD_DIR)
 	cp $< $@
@@ -66,7 +66,7 @@ $(WEBM_OBJ_LIB): $(WEBM_DIR)
 	cd $< && emcmake cmake . \
 							-DCMAKE_BUILD_TYPE=release \
 							-DCMAKE_CXX_FLAGS="-MMD -MP"
-	emmake make -C $<
+	emmake make -j -C $<
 
 $(WEBM_OBJ): $(WEBM_OBJ_LIB) $(LIB_BUILD_DIR)
 	cp $< $@

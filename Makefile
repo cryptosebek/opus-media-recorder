@@ -135,7 +135,7 @@ LIB_OBJS = $(OPUS_OBJ) $(OGG_OBJ) $(SPEEX_OBJ) $(WEBM_OBJ)
 
 # 1.1 Static library targets
 $(LIB_OBJS):
-	make -C $(LIB_DIR) $@
+	make -j -C $(LIB_DIR) $@
 
 # 1.2 C++ - WebIDL - JavaScript glue code targets
 $(WEBIDL_GLUE_JS): $(addprefix $(SRC_DIR)/,$(WEBIDL)) $(LIB_BUILD_DIR)
@@ -227,8 +227,8 @@ $(BUILD_DIR) $(LIB_BUILD_DIR):
 	mkdir -p $@
 
 build-docs:
-	OUTPUT_DIR=$(DOCS_DIR) make -C $(EXAMPLE_DIR)/example_template
-	OUTPUT_DIR=$(EXAMPLE_DIR)/webpack make -C $(EXAMPLE_DIR)/example_template
+	OUTPUT_DIR=$(DOCS_DIR) make -j -C $(EXAMPLE_DIR)/example_template
+	OUTPUT_DIR=$(EXAMPLE_DIR)/webpack make -j -C $(EXAMPLE_DIR)/example_template
 
 serve: all
 	# Run server
@@ -236,7 +236,7 @@ serve: all
 
 clean-lib:
 	# Clean /lib
-	make -C $(LIB_DIR) clean
+	make -j -C $(LIB_DIR) clean
 
 clean-js:
 	# Delete build files, not touch subdirectory like LIB_BUILD_DIR
